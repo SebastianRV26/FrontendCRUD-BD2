@@ -3,14 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
+import { InformacionComponent } from './informacion/informacion.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioSesionComponent
+    InicioSesionComponent,
+    InformacionComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

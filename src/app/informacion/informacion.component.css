@@ -1,0 +1,35 @@
+.icons-tab{
+    cursor: pointer;
+    color: white; 
+    border-radius: 0.2em;
+    margin-right: 0.5em;
+    -webkit-box-shadow: 0 0 5px rgb(0,0,0);
+    -moz-box-shadow: 0 0 5px rgb(0,0,0);
+}
+.title-tab{
+    background-color:rgb(5, 5, 56);
+    color: white;
+}
+.mat-tab{
+    width: 100%;
+}
+.mat-tabTitle{
+    background-color:rgb(5, 5, 56);
+}
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+.mat-tabTitleOptions{
+    background-color:rgb(5, 5, 56);
+    width: 10em;
+}
+.mat-elevation-z8{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.row{
+    display: flex;
+}

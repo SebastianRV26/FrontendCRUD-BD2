@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-lg-3">
+        <mat-form-field>
+            <input matInput [(ngModel)]=search name="nSearch" placeholder="Buscar">
+        </mat-form-field>
+    </div>
+    <div class="col-lg-3">
+        <button mat-mini-fab style="background-color:rgb(35, 35, 245, 0.925)" (click)="applyFilter(search)">
+            <i class="material-icons">search</i>
+        </button>
+    </div>
+</div>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-tab">
+    <!-- Columna del id -->
+    <ng-container matColumnDef="id_persona">
+        <mat-header-cell *matHeaderCellDef mat-sort-header  class="mat-tabTitle"> ID </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.id_persona }} </mat-cell>
+    </ng-container>
+  
+    <!-- Columna del nombre -->
+    <ng-container matColumnDef="nombre_persona">
+        <mat-header-cell *matHeaderCellDef mat-sort-header  class="mat-tabTitle"> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.nombre_persona }} </mat-cell>
+    </ng-container>
+    
+    <!-- Columna Desayunos -->
+    <ng-container matColumnDef="total_desayuno">
+        <mat-header-cell *matHeaderCellDef mat-sort-header  class="mat-tabTitle"> Desayunos </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.total_desayuno }} </mat-cell>
+    </ng-container>
+    
+    <!-- Columna Almuerzos -->
+    <ng-container matColumnDef="total_almuerzo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header  class="mat-tabTitle"> Almuerzos </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.total_almuerzo }} </mat-cell>
+    </ng-container>
+    
+    <!--  Columna Cenas -->
+    <ng-container matColumnDef="total_cena">
+        <mat-header-cell *matHeaderCellDef mat-sort-header  class="mat-tabTitle"> fsdbjhbdfh </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.total_cena }} </mat-cell>
+    </ng-container>
+  
+    <!-- Columna de opciones -->
+    <ng-container matColumnDef="opciones">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="mat-tabTitleOptions"> Opciones </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <i data-toggle="modal" data-target="#ModalDelete" 
+            class="material-icons icons-tab" style="background: orange">edit</i>
+            <i data-toggle="modal" data-target="#ModalDelete" 
+            class="material-icons icons-tab" style="background: red">delete</i>
+        </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+    </table>
+</div>
+  
