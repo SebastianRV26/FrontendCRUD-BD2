@@ -6,6 +6,8 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { InformacionComponent } from './informacion/informacion.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from "@angular/material/table";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { MatTableModule } from "@angular/material/table";
     BrowserModule,
     BrowserAnimationsModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

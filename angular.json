@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "FrontendCRUD-BD2"
+  "defaultProject": "FrontendCRUD-BD2",
+  "cli": {
+    "analytics": "0961e583-c75a-4aaa-8768-69610106f749"
+  }
 }
