@@ -21,7 +21,7 @@ const ELEMENT_DATA: TableData[] = [
   styleUrls: ['./information.component.css']
 })
 export class InformationComponent implements OnInit {
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['check','name'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   constructor() { }

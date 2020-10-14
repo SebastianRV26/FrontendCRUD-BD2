@@ -23,18 +23,24 @@
         </mat-form-field>
     </div>
 
-    <button mat-flat-button (click)="clickAdd()">
-        <mat-icon class="text-white">add</mat-icon>Agregar
-    </button>
-    <button mat-flat-button (click)="clickEdit()">
-        <mat-icon class="text-white">edit</mat-icon>Modificar
-    </button>
+    <mat-checkbox>Agregar</mat-checkbox>
+    <mat-checkbox>Observar</mat-checkbox>
+    <mat-checkbox>Modificar</mat-checkbox>
+    <mat-checkbox>Eliminar</mat-checkbox>
     <button mat-flat-button (click)="clickDelete()">
-        <mat-icon class="text-white">delete</mat-icon>Eliminar
+        <mat-icon class="text-white">save</mat-icon>Ejecutar
     </button>
+
 
     <div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- CheckBox Column -->
+            <ng-container matColumnDef="check">
+                <th mat-header-cell *matHeaderCellDef> 
+                    <mat-checkbox>Seleccionar todas</mat-checkbox> </th>
+                <td mat-cell *matCellDef="let element"> <mat-checkbox></mat-checkbox> </td>
+            </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="name">
