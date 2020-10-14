@@ -33,15 +33,7 @@ export class InformationComponent implements OnInit {
     this.dataSource.filter = event.target.value.trim();
   }
 
-  clickAdd() {
-
-  }
-
-  clickEdit() {
-
-  }
-
-  clickDelete() {
+  clickExec() {
 
   }
 
