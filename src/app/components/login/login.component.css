@@ -182,3 +182,22 @@ a {
 .foot-lnk {
     text-align: center;
 }
+
+mat-form-field{
+    margin-left: 10px;
+    margin-bottom: 0%;
+}
+
+.white {
+    color: white;
+}
+
+.mat-select {
+    width: 100%;
+    color: #fff;
+    text-align:center;
+}
+
+.input {
+    color: black;
+}
