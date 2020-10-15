@@ -2,7 +2,7 @@
     <div class="bloque">
         <mat-form-field appearance="standard">
             <mat-label>Esquemas</mat-label>
-            <mat-select matNativeControl>
+            <mat-select matNativeControl [(value)]="scheme" required>
                 <mat-option value="option1">Esquema 1</mat-option>
                 <mat-option value="option2">Esquema 2</mat-option>
                 <mat-option value="option3">Esquema 3</mat-option>
@@ -10,7 +10,7 @@
         </mat-form-field>
         <mat-form-field appearance="standard">
             <mat-label>Tipo</mat-label>
-            <mat-select matNativeControl>
+            <mat-select matNativeControl [(value)]="action" required>
                 <mat-option value="option1">Ejecutar</mat-option>
                 <mat-option value="option2">Texto</mat-option>
             </mat-select>
@@ -23,23 +23,27 @@
         </mat-form-field>
     </div>
 
-    <mat-checkbox class="checkbox">Agregar</mat-checkbox>
-    <mat-checkbox class="checkbox">Observar</mat-checkbox>
-    <mat-checkbox class="checkbox">Modificar</mat-checkbox>
-    <mat-checkbox class="checkbox">Eliminar</mat-checkbox>
-    <button mat-flat-button (click)="clickExec()">
-        <mat-icon class="text-white">save</mat-icon>Ejecutar
-    </button>
-
+    <section>
+        <mat-checkbox [(ngModel)]="create" class="checkbox">Agregar</mat-checkbox>
+        <mat-checkbox [(ngModel)]="read" class="checkbox">Observar</mat-checkbox>
+        <mat-checkbox [(ngModel)]="update" class="checkbox">Modificar</mat-checkbox>
+        <mat-checkbox [(ngModel)]="delete" class="checkbox">Eliminar</mat-checkbox>
+        <button mat-flat-button (click)="clickExec()">
+            <mat-icon class="text-white">save</mat-icon>Ejecutar
+        </button>
+    </section>
 
     <div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
             <!-- CheckBox Column -->
             <ng-container matColumnDef="check">
-                <th mat-header-cell *matHeaderCellDef> 
-                    <mat-checkbox>Seleccionar todas</mat-checkbox> </th>
-                <td mat-cell *matCellDef="let element"> <mat-checkbox></mat-checkbox> </td>
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox>Seleccionar todas</mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox></mat-checkbox>
+                </td>
             </ng-container>
 
             <!-- Name Column -->

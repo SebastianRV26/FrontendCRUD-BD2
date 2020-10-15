@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵAPP_ID_RANDOM_PROVIDER } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableData } from '../../models/TableData'
 
@@ -24,6 +24,13 @@ export class InformationComponent implements OnInit {
   displayedColumns: string[] = ['check','name'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
+  create = false;
+  read = false;
+  update = false;
+  delete = false;
+  scheme = "";
+  action = "";
+
   constructor() { }
 
   ngOnInit(): void {
@@ -34,7 +41,9 @@ export class InformationComponent implements OnInit {
   }
 
   clickExec() {
-
+    console.log("Add " + this.create + " read "+this.read + " update "+this.update+" delete "+this.delete)
+    console.log("Esquema: "+this.scheme)
+    console.log("Acción: "+this.action)
   }
 
 }
