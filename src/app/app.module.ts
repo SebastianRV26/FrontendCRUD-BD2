@@ -21,6 +21,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './services/interceptor.service';
 import { TableService } from './services/table.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { TableService } from './services/table.service';
       multi: true
     },
     AuthService,
-    TableService
+    TableService,
+    [AuthGuard]
   ],
   bootstrap: [AppComponent]
 })

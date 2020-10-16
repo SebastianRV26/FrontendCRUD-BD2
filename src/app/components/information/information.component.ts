@@ -2,19 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableData } from '../../models/TableData'
 import { TableService } from '../../services/table.service';
-
-const ELEMENT_DATA: TableData[] = [
-  { name: 'Tabla 1' },
-  { name: 'Tabla 2' },
-  { name: 'Tabla 3' },
-  { name: 'Tabla 4' },
-  { name: 'Tabla 5' },
-  { name: 'Tabla 6' },
-  { name: 'Tabla 7' },
-  { name: 'Tabla 8' },
-  { name: 'Tabla 9' },
-  { name: 'Tabla 10' },
-];
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-information',
@@ -22,10 +10,10 @@ const ELEMENT_DATA: TableData[] = [
   styleUrls: ['./information.component.css']
 })
 export class InformationComponent implements OnInit {
-  displayedColumns: string[] = ['check', 'name'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['name', 'create_check', 'read_check', 'update_check', 'delete_check'];
+  dataSource = new MatTableDataSource();
 
-  constructor(private tableService: TableService) { }
+  constructor(private tableService: TableService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadTables();
@@ -34,14 +22,24 @@ export class InformationComponent implements OnInit {
   loadTables() {
     this.tableService.getTables({})
       .subscribe(res => {
-        console.log(res.body);
+        this.dataSource.data = res.body.data;
       }, error => {
-        console.log(error);
+        this.snackBar.open(" Error de conexión ", 'Cerrar', {
+          duration: 2000,
+        });
       });
   }
 
   search(event: any) {
     this.dataSource.filter = event.target.value.trim();
+  }
+
+  checkAllColumn(ev, column) {
+    this.dataSource.data.forEach(x => x[column] = ev.checked)
+  }
+
+  isAllCheckedColumn(column) {
+    return this.dataSource.data.every(p => p[column]);
   }
 
   clickExec() {

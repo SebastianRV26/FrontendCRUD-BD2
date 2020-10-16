@@ -23,10 +23,6 @@
         </mat-form-field>
     </div>
 
-    <mat-checkbox class="checkbox">Agregar</mat-checkbox>
-    <mat-checkbox class="checkbox">Observar</mat-checkbox>
-    <mat-checkbox class="checkbox">Modificar</mat-checkbox>
-    <mat-checkbox class="checkbox">Eliminar</mat-checkbox>
     <button mat-flat-button (click)="clickExec()">
         <mat-icon class="text-white">save</mat-icon>Ejecutar
     </button>
@@ -35,17 +31,55 @@
     <div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-            <!-- CheckBox Column -->
-            <ng-container matColumnDef="check">
-                <th mat-header-cell *matHeaderCellDef> 
-                    <mat-checkbox>Seleccionar todas</mat-checkbox> </th>
-                <td mat-cell *matCellDef="let element"> <mat-checkbox></mat-checkbox> </td>
-            </ng-container>
-
             <!-- Name Column -->
-            <ng-container matColumnDef="name">
+            <ng-container matColumnDef="name" class="mat-column-name">
                 <th mat-header-cell *matHeaderCellDef> Nombre </th>
                 <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Create column -->
+            <ng-container matColumnDef="create_check" class="mat-column-check">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox [checked]="isAllCheckedColumn('create')" (change)="checkAllColumn($event, 'create')">
+                        Insertar
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox [checked]="element.create" (change)="element.create = !element.create"></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- Read column -->
+            <ng-container matColumnDef="read_check" class="mat-column-check">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox [checked]="isAllCheckedColumn('read')" (change)="checkAllColumn($event, 'read')">
+                        Obtener</mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox [checked]="element.read" (change)="element.read = !element.read"></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- Update column -->
+            <ng-container matColumnDef="update_check" class="mat-column-check">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox [checked]="isAllCheckedColumn('update')" (change)="checkAllColumn($event, 'update')">
+                        Modificar</mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox [checked]="element.update" (change)="element.update = !element.update"></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- Delete column -->
+            <ng-container matColumnDef="delete_check" class="mat-column-check">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox [checked]="isAllCheckedColumn('delete')" (change)="checkAllColumn($event, 'delete')">
+                        Eliminar</mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox [checked]="element.delete" (change)="element.delete = !element.delete"></mat-checkbox>
+                </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
