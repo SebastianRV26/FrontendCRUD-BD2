@@ -15,6 +15,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+// Services
+import { AuthService } from './services/auth.service';
+import { AuthInterceptor } from './services/interceptor.service';
+import { TableService } from './services/table.service';
 
 @NgModule({
   declarations: [
@@ -35,8 +41,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     MatCheckboxModule,
     MatSnackBarModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    AuthService,
+    TableService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

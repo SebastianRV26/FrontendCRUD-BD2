@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableData } from '../../models/TableData'
+import { TableService } from '../../services/table.service';
 
 const ELEMENT_DATA: TableData[] = [
   { name: 'Tabla 1' },
@@ -21,12 +22,22 @@ const ELEMENT_DATA: TableData[] = [
   styleUrls: ['./information.component.css']
 })
 export class InformationComponent implements OnInit {
-  displayedColumns: string[] = ['check','name'];
+  displayedColumns: string[] = ['check', 'name'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  constructor() { }
+  constructor(private tableService: TableService) { }
 
   ngOnInit(): void {
+    this.loadTables();
+  }
+
+  loadTables() {
+    this.tableService.getTables({})
+      .subscribe(res => {
+        console.log(res.body);
+      }, error => {
+        console.log(error);
+      });
   }
 
   search(event: any) {
