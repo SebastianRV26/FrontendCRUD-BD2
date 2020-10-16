@@ -1,3 +1,3 @@
 export interface TableData {
-    name: string;
+    table_name: string;
 }

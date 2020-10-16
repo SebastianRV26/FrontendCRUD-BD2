@@ -1,18 +1,20 @@
 import { Component, OnInit, ɵAPP_ID_RANDOM_PROVIDER } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { TableData } from '../../models/TableData'
+import { TableData } from '../../models/TableData';
+import { InformationService } from '../../services/information.service';
+import { HttpParams, HttpErrorResponse } from '@angular/common/http';
 
 const ELEMENT_DATA: TableData[] = [
-  { name: 'Tabla 1' },
-  { name: 'Tabla 2' },
-  { name: 'Tabla 3' },
-  { name: 'Tabla 4' },
-  { name: 'Tabla 5' },
-  { name: 'Tabla 6' },
-  { name: 'Tabla 7' },
-  { name: 'Tabla 8' },
-  { name: 'Tabla 9' },
-  { name: 'Tabla 10' },
+  { table_name: 'Tabla 1' },
+  { table_name: 'Tabla 2' },
+  { table_name: 'Tabla 3' },
+  { table_name: 'Tabla 4' },
+  { table_name: 'Tabla 5' },
+  { table_name: 'Tabla 6' },
+  { table_name: 'Tabla 7' },
+  { table_name: 'Tabla 8' },
+  { table_name: 'Tabla 9' },
+  { table_name: 'Tabla 10' },
 ];
 
 @Component({
@@ -24,6 +26,13 @@ export class InformationComponent implements OnInit {
   displayedColumns: string[] = ['check','name'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
+  schemes: string[] = [
+    'Esquema 1',
+    'Esquema 2',
+    'Esquema 3',
+    'Esquema 4'
+  ];
+
   create = false;
   read = false;
   update = false;
@@ -31,9 +40,11 @@ export class InformationComponent implements OnInit {
   scheme = "";
   action = "";
 
-  constructor() { }
+  constructor(private _informationService: InformationService) { }
 
   ngOnInit(): void {
+    //this._informationService.HTTPparams = new HttpParams();
+    this.getSchemas()
   }
 
   search(event: any) {
@@ -46,5 +57,10 @@ export class InformationComponent implements OnInit {
     console.log("Acción: "+this.action)
   }
 
+  getSchemas(){
+    this._informationService.HTTPparams = new HttpParams();
+    console.log("getSchemes.tsinfo")
+    this.schemes = this._informationService.getSchemas()
+  }
 }
 
