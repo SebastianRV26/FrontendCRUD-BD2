@@ -7,10 +7,11 @@
             <div class="sign-in-htm">
                 <div class="group">
                     <mat-form-field appearance="standard">
-                        <mat-label class="white">Lenguaje</mat-label>
-                        <mat-select matNativeControl>
-                            <mat-option value="option1">SQL Server</mat-option>
-                            <mat-option value="option2">PostreSQL</mat-option>                        </mat-select>
+                        <mat-label class="white" for="driver">Lenguaje</mat-label>
+                        <mat-select matNativeControl id="driver" fromControlName="driver" (selectionChange)=changeRatio($event)>
+                            <mat-option value="mssql">SQL Server</mat-option>
+                            <mat-option value="pgsql">PostreSQL</mat-option>                        
+                        </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="group">
@@ -24,6 +25,10 @@
                 <div class="group">
                     <label for="pass" class="label">Contraseña</label>
                     <input id="pass" type="password" class="input" data-type="password" formControlName="password">
+                </div>
+                <div class="group">
+                    <label for="server" class="label">Server</label>
+                    <input id="server" type="text" class="input" formControlName="server">
                 </div>
                 <div class="group">
                     <button mat-button type="submit" class="button">Establecer conexión</button>
