@@ -1,40 +1,60 @@
 table {
-    width: 100%;
-    margin-top: 10px;
+  width: 100%;
+  margin-top: 10px;
 }
 
-.bloque{
-    display: block;
+.bloque {
+  display: block;
 }
 
-mat-form-field{
-    margin-left: 10px;
-    margin-bottom: 0%;
+mat-form-field {
+  margin-left: 10px;
+  margin-bottom: 0%;
 }
 
-mat-table{
-    width: 100%;
-    margin: 1% auto;
-    background-color: transparent;
-    border-radius: 15px;
-  }
+mat-table {
+  width: 100%;
+  margin: 1% auto;
+  background-color: transparent;
+  border-radius: 15px;
+}
 
 .mat-header-cell {
-    color: black;
-    font-weight: bold;
-    margin-bottom: 0.5%;
-    width: 25%;
-    text-align: center;
-    justify-content: center;
-  }
+  color: black;
+  font-weight: bold;
+  margin-bottom: 0.5%;
+  justify-content: center;
+}
 
 .mat-cell {
-    margin-bottom: 0.5%;
-    width: 25%;
-    text-align: center;
-    justify-content: center;
-  }
+  margin-bottom: 0.5%;
+  justify-content: center;
+}
 
-.checkbox {
-    margin-left: 15px;
+.mat-column-name {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 30% !important;
+  width: 30% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-check {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 20% !important;
+  width: 20% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }

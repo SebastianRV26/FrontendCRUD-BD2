@@ -1,21 +1,9 @@
 import { Component, OnInit, ɵAPP_ID_RANDOM_PROVIDER } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { TableData } from '../../models/TableData';
+import { TableData } from '../../models/TableData'
+import { TableService } from '../../services/table.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { InformationService } from '../../services/information.service';
-import { HttpParams, HttpErrorResponse } from '@angular/common/http';
-
-const ELEMENT_DATA: TableData[] = [
-  { table_name: 'Tabla 1' },
-  { table_name: 'Tabla 2' },
-  { table_name: 'Tabla 3' },
-  { table_name: 'Tabla 4' },
-  { table_name: 'Tabla 5' },
-  { table_name: 'Tabla 6' },
-  { table_name: 'Tabla 7' },
-  { table_name: 'Tabla 8' },
-  { table_name: 'Tabla 9' },
-  { table_name: 'Tabla 10' },
-];
 
 @Component({
   selector: 'app-information',
@@ -23,44 +11,47 @@ const ELEMENT_DATA: TableData[] = [
   styleUrls: ['./information.component.css']
 })
 export class InformationComponent implements OnInit {
-  displayedColumns: string[] = ['check','name'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['name', 'create_check', 'read_check', 'update_check', 'delete_check'];
+  dataSource = new MatTableDataSource();
 
-  schemes: string[] = [
-    'Esquema 1',
-    'Esquema 2',
-    'Esquema 3',
-    'Esquema 4'
-  ];
-
-  create = false;
-  read = false;
-  update = false;
-  delete = false;
-  scheme = "";
-  action = "";
-
-  constructor(private _informationService: InformationService) { }
+  constructor(private tableService: TableService, private snackBar: MatSnackBar, 
+    private _informationService: InformationService) { }
 
   ngOnInit(): void {
-    //this._informationService.HTTPparams = new HttpParams();
+    this.loadTables();
     this.getSchemas()
+  }
+
+  loadTables() {
+    this.tableService.getTables({})
+      .subscribe(res => {
+        this.dataSource.data = res.body.data;
+      }, error => {
+        this.snackBar.open(" Error de conexión ", 'Cerrar', {
+          duration: 2000,
+        });
+      });
   }
 
   search(event: any) {
     this.dataSource.filter = event.target.value.trim();
   }
 
+  checkAllColumn(ev, column) {
+    this.dataSource.data.forEach(x => x[column] = ev.checked)
+  }
+
+  isAllCheckedColumn(column) {
+    return this.dataSource.data.every(p => p[column]);
+  }
+
   clickExec() {
-    console.log("Add " + this.create + " read "+this.read + " update "+this.update+" delete "+this.delete)
-    console.log("Esquema: "+this.scheme)
-    console.log("Acción: "+this.action)
+
   }
 
   getSchemas(){
-    this._informationService.HTTPparams = new HttpParams();
     console.log("getSchemes.tsinfo")
-    this.schemes = this._informationService.getSchemas()
+    //this.schemes = this._informationService.getSchemas()
   }
 }
 

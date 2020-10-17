@@ -1,3 +1,7 @@
 export interface TableData {
-    table_name: string;
+    name: string;
+    create: boolean;
+    read: boolean;
+    update: boolean;
+    delete: boolean;
 }
