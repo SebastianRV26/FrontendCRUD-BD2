@@ -1,3 +1,3 @@
 export interface SchemaData {
-    TABLE_SCHEMA: string;
+    table_schema: string;
 }
