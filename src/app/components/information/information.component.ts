@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableData } from '../../models/TableData'
 import { TableService } from '../../services/table.service';
+import { CrudService } from '../../services/crud.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-information',
@@ -13,7 +16,9 @@ export class InformationComponent implements OnInit {
   displayedColumns: string[] = ['name', 'create_check', 'read_check', 'update_check', 'delete_check'];
   dataSource = new MatTableDataSource();
 
-  constructor(private tableService: TableService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private tableService: TableService,
+    private crudService: CrudService, private dataService: DataService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadTables();
@@ -43,7 +48,29 @@ export class InformationComponent implements OnInit {
   }
 
   clickExec() {
+    let request = {
+      schema: "dbo",
+      execute: false,
+      tables: {}
+    }
+    this.dataSource.data.forEach((data: TableData) => {
+      request.tables[data.name] = {
+        create: data.create ? true : false,
+        read: data.read ? true : false,
+        update: data.update ? true : false,
+        delete: data.delete ? true : false
+      };
+    });
 
+    this.crudService.generateCrud(request)
+      .subscribe(res => {
+        this.dataService.changeMessage(res.body.data);
+        this.router.navigateByUrl('/code');
+      }, error => {
+        this.snackBar.open(" Error de conexión ", 'Cerrar', {
+          duration: 2000,
+        });
+      });
   }
 
 }
