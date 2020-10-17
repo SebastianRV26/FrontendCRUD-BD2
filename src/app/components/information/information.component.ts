@@ -3,6 +3,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TableService } from '../../services/table.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InformationService } from '../../services/information.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogSchemeComponent } from '../dialog-scheme/dialog-scheme.component';
 
 @Component({
   selector: 'app-information',
@@ -13,16 +15,17 @@ export class InformationComponent implements OnInit {
   displayedColumns: string[] = ['name', 'create_check', 'read_check', 'update_check', 'delete_check'];
   dataSource = new MatTableDataSource();
 
-  schemes:string[];
+  schemes:any[];
   action = "";
   scheme = "";
+  extraScheme = "";
 
   constructor(private tableService: TableService, private snackBar: MatSnackBar, 
-    private _informationService: InformationService) { }
+    private _informationService: InformationService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadTables();
-    this.getSchemas()
+    this.getSchemas("");
   }
 
   loadTables() {
@@ -52,10 +55,13 @@ export class InformationComponent implements OnInit {
 
   }
 
-  getSchemas(){
+  getSchemas(newElement:string){
     this._informationService.getSchemas()
       .subscribe(res => {
         this.schemes = res.body.data;
+        if (newElement!=""){
+          this.schemes.push({"TABLE_SCHEMA":newElement})//(this.extraScheme+"")
+        }
       }, error => {
         this.snackBar.open(" Error de conexión ", 'Cerrar', {
           duration: 2000,
@@ -63,5 +69,23 @@ export class InformationComponent implements OnInit {
       });
     
   }
+
+  clickAdd(){
+    const dialogRef = this.dialog.open(DialogSchemeComponent, {
+      width: '30%',
+      height: '45%',
+      data: { }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result != undefined) {
+        //this.openDialogConfirmationAdd(result); //llama al otro dialog
+        this.extraScheme = result;
+        this.getSchemas(this.extraScheme)
+      }
+    });
+  }
+  
+
 }
 

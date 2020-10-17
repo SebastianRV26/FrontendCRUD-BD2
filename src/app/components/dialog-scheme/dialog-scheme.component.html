@@ -1,0 +1,11 @@
+<h1 mat-dialog-title class="align"><b>Agregar esquema</b></h1>
+<div mat-dialog-content>
+  <p class="align">Nombre del esquema: </p>
+  <mat-form-field class="margin">
+    <input matInput [(ngModel)]="name" placeholder="Nombre">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="margin">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button class="btn-save" [mat-dialog-close]="name" cdkFocusInitial>Agregar</button>
+</div>

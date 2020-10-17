@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
+import { DialogSchemeComponent } from './components/dialog-scheme/dialog-scheme.component';
 import { InformationComponent } from './components/information/information.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Services
 import { AuthService } from './services/auth.service';
@@ -28,7 +30,8 @@ import { AuthGuard } from './auth.guard';
   declarations: [
     AppComponent,
     LoginComponent,
-    InformationComponent
+    InformationComponent,
+    DialogSchemeComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { AuthGuard } from './auth.guard';
     HttpClientModule,
     MatSnackBarModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [
     {

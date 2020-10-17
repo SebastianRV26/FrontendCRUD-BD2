@@ -1,5 +1,8 @@
 <div>
     <div class="bloque">
+        <button mat-flat-button (click)="clickAdd()">
+            <mat-icon class="text-white">add</mat-icon>
+        </button>
         <mat-form-field appearance="standard">
             <mat-label>Esquemas</mat-label>
             <mat-select matNativeControl [(value)]="scheme" required>
