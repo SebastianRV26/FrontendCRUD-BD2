@@ -3,19 +3,16 @@
         <mat-form-field appearance="standard">
             <mat-label>Esquemas</mat-label>
             <mat-select matNativeControl [(value)]="scheme" required>
-            <!--    <mat-option value="option1"></mat-option>
-                <mat-option value="option2">Esquema 2</mat-option>
-                <mat-option value="option3">Esquema 3</mat-option>-->
                 <mat-option *ngFor="let element of schemes" [value]="element">
-                    {{element}}
+                    {{element.TABLE_SCHEMA}}
                   </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="standard">
             <mat-label>Tipo</mat-label>
             <mat-select matNativeControl [(value)]="action" required>
-                <mat-option value="option1">Ejecutar</mat-option>
-                <mat-option value="option2">Texto</mat-option>
+                <mat-option value="option1">Generar</mat-option>
+                <mat-option value="option2">Generar y ejecutar</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="standard">

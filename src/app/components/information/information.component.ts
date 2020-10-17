@@ -1,6 +1,5 @@
 import { Component, OnInit, ɵAPP_ID_RANDOM_PROVIDER } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { TableData } from '../../models/TableData'
 import { TableService } from '../../services/table.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InformationService } from '../../services/information.service';
@@ -13,6 +12,10 @@ import { InformationService } from '../../services/information.service';
 export class InformationComponent implements OnInit {
   displayedColumns: string[] = ['name', 'create_check', 'read_check', 'update_check', 'delete_check'];
   dataSource = new MatTableDataSource();
+
+  schemes:string[];
+  action = "";
+  scheme = "";
 
   constructor(private tableService: TableService, private snackBar: MatSnackBar, 
     private _informationService: InformationService) { }
@@ -50,8 +53,15 @@ export class InformationComponent implements OnInit {
   }
 
   getSchemas(){
-    console.log("getSchemes.tsinfo")
-    //this.schemes = this._informationService.getSchemas()
+    this._informationService.getSchemas()
+      .subscribe(res => {
+        this.schemes = res.body.data;
+      }, error => {
+        this.snackBar.open(" Error de conexión ", 'Cerrar', {
+          duration: 2000,
+        });
+      });
+    
   }
 }
 
