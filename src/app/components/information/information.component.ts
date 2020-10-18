@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { DialogSchemeComponent } from '../dialog-scheme/dialog-scheme.component';
 import { DataService } from '../../services/data.service';
 import { TableData } from '../../models/TableData';
+import { SchemaData } from '../../models/SchemaData';
 
 @Component({
   selector: 'app-information',
@@ -21,7 +22,7 @@ export class InformationComponent implements OnInit {
 
   schemes:any[];
   action = "";
-  scheme = "";
+  scheme:SchemaData;
   extraScheme = "";
 
   constructor(private router: Router, private tableService: TableService,
@@ -58,9 +59,13 @@ export class InformationComponent implements OnInit {
   }
 
   clickExec() {
+    let schema = "dbo";
+    if (this.scheme != undefined){
+      schema = this.scheme.table_schema;
+    }
     let request = {
-      schema: "dbo",
-      execute: false,
+      schema: schema,
+      execute: false,/*(this.action=="option2") booleano true si escogió ejecutar*/
       tables: {}
     }
     this.dataSource.data.forEach((data: TableData) => {
