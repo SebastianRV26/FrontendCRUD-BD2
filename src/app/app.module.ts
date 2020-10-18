@@ -19,19 +19,24 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CodeComponent } from './components/code/code.component';
 
 // Services
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './services/interceptor.service';
 import { TableService } from './services/table.service';
+import { CrudService } from './services/crud.service';
+import { DataService } from './services/data.service';
 import { AuthGuard } from './auth.guard';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     InformationComponent,
-    DialogSchemeComponent
+    DialogSchemeComponent,
+    CodeComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ import { AuthGuard } from './auth.guard';
     MatSnackBarModule,
     HttpClientModule,
     MatDialogModule,
+    HighlightModule
   ],
   providers: [
     {
@@ -57,9 +63,21 @@ import { AuthGuard } from './auth.guard';
       useClass: AuthInterceptor,
       multi: true
     },
+    [AuthGuard],
     AuthService,
     TableService,
-    [AuthGuard]
+    CrudService,
+    DataService,
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        lineNumbersLoader: () => import('highlightjs-line-numbers.js'), // Optional, only if you want the line numbers
+        languages: {
+          sql: () => import('highlight.js/lib/languages/sql')
+        }
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })

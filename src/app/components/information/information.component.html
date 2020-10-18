@@ -7,7 +7,7 @@
             <mat-label>Esquemas</mat-label>
             <mat-select matNativeControl [(value)]="scheme" required>
                 <mat-option *ngFor="let element of schemes" [value]="element">
-                    {{element.TABLE_SCHEMA}}
+                    {{element.table_schema}}
                   </mat-option>
             </mat-select>
         </mat-form-field>
