@@ -59,9 +59,11 @@ export class InformationComponent implements OnInit {
   }
 
   clickExec() {
-    let schema = "dbo";
+    let schema = "";
     if (this.scheme != undefined){
       schema = this.scheme.table_schema;
+    } else {
+      schema = this.schemes[0].table_schema;
     }
     let request = {
       schema: schema,
