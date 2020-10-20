@@ -65,7 +65,8 @@ export class InformationComponent implements OnInit {
     }
     let request = {
       schema: schema,
-      execute: false,/*(this.action=="option2") booleano true si escogió ejecutar*/
+      createSchema: schema == this.extraScheme,
+      execute: this.action=="option2",
       tables: {}
     }
     this.dataSource.data.forEach((data: TableData) => {
