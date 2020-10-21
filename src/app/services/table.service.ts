@@ -8,6 +8,11 @@ export class TableService {
 
     constructor(private _http: HttpClient) { }
 
+    /**
+     * Ejecuta la solicitud de obtener tablas.
+     * 
+     * @param params datos
+     */
     getTables(params: any): Observable<any> {
         return this._http.get(`${environment.baseUrl}/GetTables`, { params, observe: "response" });
     }

@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit(): void {
+    // Valida los campos requeridos
     this.loginForm = this.formBuilder.group({
       user: ['', Validators.required],
       password: ['', Validators.required],
@@ -33,11 +34,14 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginForm.value.driver = this.seleccionada;
     var split = this.loginForm.value.server.split(":", 2);
+
+    // Si el driver es mssql se ponen el puerto y la direccion juntas
     if (this.loginForm.value.driver === "mssql") {
       this.loginForm.removeControl("port");
       this.loginForm.value.driver = this.seleccionada;
       this.loginForm.value.server = split[0];
     } else {
+      // Si es mssql se hace separado
       if (split[1] == undefined) {
         this._snackBar.open(" Debe de colocar el puerto junto al server ", 'Cerrar', {
           duration: 2000,
@@ -48,12 +52,14 @@ export class LoginComponent implements OnInit {
       }
     }
 
+    // Se hace el login
     this.authService.login(this.loginForm.value)
       .subscribe(res => {
         this.authService.setSession(res.body);
         this.router.navigateByUrl('/information');
       }, error => {
         switch (error.status) {
+          // Manejo de errores
           case 1: case 2:
             this._snackBar.open(" Credenciales Incorrectos ", 'Cerrar', {
               duration: 2000,

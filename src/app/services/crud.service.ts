@@ -9,6 +9,11 @@ export class CrudService {
 
     constructor(private _http: HttpClient) { }
 
+    /**
+     * Ejecuta la solicitud de generacion de código.
+     * 
+     * @param params datos de generación de código
+     */
     generateCrud(params: any): Observable<any> {
         return this._http.post(`${environment.baseUrl}/${this.apiRoute}`, params, { observe: "response" });
     }
