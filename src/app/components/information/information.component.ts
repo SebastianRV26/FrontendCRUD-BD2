@@ -79,9 +79,11 @@ export class InformationComponent implements OnInit {
    * Ejecuta la solicitud de generar código al servidor
    */
   clickExec() {
-    let schema = "dbo";
-    if (this.scheme != undefined) {
+    let schema = "";
+    if (this.scheme != undefined){
       schema = this.scheme.table_schema;
+    } else {
+      schema = this.schemes[0].table_schema;
     }
     let request = {
       schema: schema,
