@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.value.driver === "mssql") {
       this.loginForm.removeControl("port");
       this.loginForm.value.driver = this.seleccionada;
-      this.loginForm.value.server = split[0];
+      this.loginForm.value.server = this.loginForm.value.server;
     } else {
       // Si es mssql se hace separado
       if (split[1] == undefined) {
