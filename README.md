@@ -24,5 +24,5 @@ Acerca de: Frontend del generador de CRUD's.
 * [Sebastián Rojas Vargas](https://github.com/SebastianRV26)
 
 Curso: Bases de Datos 2. 
-I Semestre 2020. 
+II Semestre 2020. 
 Profesor: Leonardo Víquez Acuña.
